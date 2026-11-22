@@ -1,0 +1,42 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.dotcom-tools/mcp",
+  "title": "Dotcom-Tools",
+  "description": "Run website speed, ping, traceroute, DNS, web server, email, FTP and streaming tests from locations worldwide.",
+  "version": "1.0.0",
+  "websiteUrl": "https://www.dotcom-tools.com/docs/mcp",
+  "repository": {
+    "url": "https://github.com/dotcom-tools/mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.dotcom-tools.com/mcp",
+      "headers": [
+        {
+          "name": "X-Api-Key",
+          "description": "Your Dotcom-Tools API key (free: https://www.dotcom-tools.com/account#api)",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@dotcom-tools/mcp",
+      "version": "1.0.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "DOTCOM_TOOLS_API_KEY",
+          "description": "Your Dotcom-Tools API key (free: https://www.dotcom-tools.com/account#api)",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

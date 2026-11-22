@@ -1,0 +1,52 @@
+{
+  "name": "@dotcom-tools/mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Dotcom-Tools: run website speed, ping, traceroute, DNS, web server, email, FTP and streaming tests from 20+ locations in Claude, Cursor, VS Code and other AI assistants.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "website-speed-test",
+    "ping",
+    "traceroute",
+    "dns",
+    "monitoring",
+    "web-performance",
+    "core-web-vitals"
+  ],
+  "homepage": "https://www.dotcom-tools.com/docs/mcp",
+  "license": "MIT",
+  "author": "Dotcom-Monitor, Inc.",
+  "mcpName": "com.dotcom-tools/mcp",
+  "type": "module",
+  "bin": {
+    "dotcom-tools-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "server.json"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/bridge.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "typescript": "~6.0.2",
+    "zod": "^4.6.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotcom-tools/mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dotcom-tools/mcp/issues"
+  }
+}
