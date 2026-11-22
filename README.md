@@ -43,9 +43,30 @@ can connect to it directly; this package is for clients that run local (stdio) s
 
 ### Claude Code
 
+Install the plugin: it adds the MCP server and the [Dotcom-Tools skill](skills/dotcom-tools/SKILL.md), which tells
+Claude which test answers which question and how to read the results. Set your key in the environment first; the
+plugin reads `DOTCOM_TOOLS_API_KEY`.
+
+```sh
+export DOTCOM_TOOLS_API_KEY=YOUR_KEY
+```
+
+```text
+/plugin marketplace add dotcom-tools/mcp
+/plugin install dotcom-tools@dotcom-tools
+```
+
+Or add only the MCP server:
+
 ```sh
 claude mcp add --transport http dotcom-tools https://www.dotcom-tools.com/mcp --header "X-Api-Key: YOUR_KEY"
 ```
+
+### Agent Skill for other agents
+
+[`skills/dotcom-tools/SKILL.md`](skills/dotcom-tools/SKILL.md) follows the open [Agent Skills](https://agentskills.io)
+format, so agents that load skills can use it too: copy the `skills/dotcom-tools` folder into the agent's skills
+directory. It works with the MCP server or, without it, with the REST API and `DOTCOM_TOOLS_API_KEY`.
 
 ### Claude Desktop
 

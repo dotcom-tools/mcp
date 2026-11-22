@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "dotcom-tools": {
+      "type": "http",
+      "url": "https://www.dotcom-tools.com/mcp",
+      "headers": { "X-Api-Key": "${DOTCOM_TOOLS_API_KEY}" }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "dotcom-tools",
+  "owner": { "name": "Dotcom-Monitor, Inc.", "url": "https://www.dotcom-tools.com" },
+  "description": "Dotcom-Tools for AI assistants: website and network tests from locations around the world.",
+  "plugins": [
+    {
+      "name": "dotcom-tools",
+      "source": "./",
+      "description": "The Dotcom-Tools MCP server plus a skill for outside-in website and network troubleshooting."
+    }
+  ]
+}
