@@ -1,10 +1,25 @@
 {
   "name": "dotcom-tools",
   "version": "1.0.0",
-  "description": "Outside-in website and network checks from locations around the world: uptime, speed and Core Web Vitals, broken pages, China firewall, DNS, email servers and blacklists, FTP and streaming. Adds the Dotcom-Tools MCP server and a skill that says which test to run and how to read the results.",
-  "author": { "name": "Dotcom-Monitor, Inc.", "url": "https://www.dotcom-tools.com" },
+  "description": "Outside-in website and network checks from locations around the world: uptime, speed and Core Web Vitals, broken pages, reachability from mainland China, DNS, mail servers and blacklists, FTP and streaming. Adds the Dotcom-Tools MCP server and a skill that says which test to run and how to read the results.",
+  "author": {
+    "name": "Dotcom-Monitor, Inc.",
+    "url": "https://www.dotcom-tools.com"
+  },
   "homepage": "https://www.dotcom-tools.com/docs/mcp",
   "repository": "https://github.com/dotcom-tools/mcp",
   "license": "MIT",
-  "keywords": ["website-speed-test", "uptime", "ping", "traceroute", "dns", "email-blacklist", "core-web-vitals", "mcp"]
+  "keywords": [
+    "website-speed-test",
+    "uptime",
+    "ping",
+    "traceroute",
+    "dns",
+    "email-blacklist",
+    "core-web-vitals",
+    "lighthouse",
+    "ttfb",
+    "great-firewall",
+    "mcp"
+  ]
 }
