@@ -31,7 +31,9 @@ something looks **from the internet**, not from the user's own machine.
 MCP arguments: each `check_*` tool takes its target (`url`, `target`, `host` or `domain`), its own typed settings
 (such as `device` for `check_page_speed` or `recordType` for `check_dns`), `locations` (names such as "London" or
 ids) or `regions` (such as "Europe", "Asia" or "China"), `locationCount` (default 3, `check_dns` 1) and `waitSeconds`
-(0-60, default 60). The same call within 5 minutes returns the earlier test without a new charge. `run_test` takes
+(0-60, default 60). The same call within 5 minutes returns the earlier test without a new charge; after a change or a
+fix, pass `fresh: true` to measure again. For before/after comparisons, `list_tests` with `target` finds earlier tests
+and their settings. `run_test` takes
 `testType`, `target`, `locations`, `locationCount`, `options` (any settings, including logins and headers, which the
 check tools don't take) and `waitSeconds`. `get_test_result` takes `testId`, `detail` (`summary` or `full`) and
 `location` (one name or id, with `full`).
