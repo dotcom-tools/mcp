@@ -1,5 +1,8 @@
 # Dotcom-Tools MCP server
 
+[![Dotcom-Tools MCP server](https://glama.ai/mcp/servers/dotcom-tools/mcp/badges/score.svg)](https://glama.ai/mcp/servers/dotcom-tools/mcp)
+[![Dotcom-Tools MCP connector](https://glama.ai/mcp/connectors/com.dotcom-tools/mcp/badges/score.svg)](https://glama.ai/mcp/connectors/com.dotcom-tools/mcp)
+
 Run website and network tests from locations around the world, straight from Claude, Cursor, VS Code and other AI
 assistants that support the [Model Context Protocol](https://modelcontextprotocol.io).
 
