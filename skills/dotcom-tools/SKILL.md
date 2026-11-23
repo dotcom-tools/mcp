@@ -24,7 +24,10 @@ something looks **from the internet**, not from the user's own machine.
   bad before checking, and don't fall back to REST without a key. Tell the user to sign up free at
   https://www.dotcom-tools.com/register, create a key at https://www.dotcom-tools.com/account#api, set
   `DOTCOM_TOOLS_API_KEY` in the environment that starts the client (or in the client's settings), and restart or
-  reconnect the MCP server. Never ask for the key in the chat, and never print it.
+  reconnect the MCP server. Never ask for the key in the chat, and never print it. Alternatives without a key: in
+  Claude or ChatGPT, add `https://www.dotcom-tools.com/mcp` as a connector and sign in; on a machine without a browser
+  (SSH, a container), the user runs `npx -y @dotcom-tools/mcp login` and approves the code it shows on any device. Not
+  for unattended CI: a person has to approve, so CI uses a key.
 
 ## Run a check
 

@@ -3,7 +3,7 @@
   "name": "com.dotcom-tools/mcp",
   "title": "Dotcom-Tools",
   "description": "Website speed, ping, traceroute, DNS, web server, email, FTP and streaming tests from 30+ locations.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://www.dotcom-tools.com/docs/mcp",
   "repository": {
     "url": "https://github.com/dotcom-tools/mcp",
@@ -27,13 +27,13 @@
     {
       "registryType": "npm",
       "identifier": "@dotcom-tools/mcp",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         {
           "name": "DOTCOM_TOOLS_API_KEY",
-          "description": "Your Dotcom-Tools API key (free: https://www.dotcom-tools.com/account#api)",
-          "isRequired": true,
+          "description": "Optional: your Dotcom-Tools API key (free: https://www.dotcom-tools.com/account#api). Without it, run `npx -y @dotcom-tools/mcp login` once to sign in.",
+          "isRequired": false,
           "isSecret": true
         }
       ]
