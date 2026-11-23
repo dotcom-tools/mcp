@@ -126,8 +126,27 @@ Local: run `npx -y @dotcom-tools/mcp` with the environment variable `DOTCOM_TOOL
 
 | Environment variable | |
 |---|---|
-| `DOTCOM_TOOLS_API_KEY` | Required. Your API key. |
+| `DOTCOM_TOOLS_API_KEY` | Your API key. Required unless you signed in with `login`; it wins over a stored sign-in. |
 | `DOTCOM_TOOLS_URL` | Optional. The server address, default `https://www.dotcom-tools.com/mcp`. |
+
+### Sign in without an API key (machines without a browser)
+
+On a server, over SSH or in a container, you can sign in with a code instead of creating a key:
+
+```sh
+npx -y @dotcom-tools/mcp login
+```
+
+It shows a link (`www.dotcom-tools.com/activate`) and a code. Open the link on any device, sign in or create a free
+account, type the code and approve. The bridge then uses that sign-in; leave `DOTCOM_TOOLS_API_KEY` unset.
+
+- `npx -y @dotcom-tools/mcp status` shows which credential is used. `logout` disconnects this machine.
+- The sign-in lasts while it's used at least every 60 days, and a year at most. You can disconnect it any time under
+  Account > Connected apps.
+- Tokens are stored in `~/.config/dotcom-tools/credentials.json` (`%APPDATA%\dotcom-tools` on Windows), readable only
+  by you, and are only ever sent to the server that issued them. Sign in on each machine; don't copy the file.
+- Only approve a code you started yourself.
+- Not for unattended CI: a person has to approve. Use an API key there.
 
 ## Limits and privacy
 
