@@ -3,7 +3,7 @@
   "name": "com.dotcom-tools/mcp",
   "title": "Dotcom-Tools",
   "description": "Website speed, ping, traceroute, DNS, web server, email, FTP and streaming tests from 30+ locations.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "websiteUrl": "https://www.dotcom-tools.com/docs/mcp",
   "repository": {
     "url": "https://github.com/dotcom-tools/mcp",
@@ -16,8 +16,8 @@
       "headers": [
         {
           "name": "X-Api-Key",
-          "description": "Your Dotcom-Tools API key (free: https://www.dotcom-tools.com/account#api)",
-          "isRequired": true,
+          "description": "Optional: your Dotcom-Tools API key (free: https://www.dotcom-tools.com/account#api). Without it, the client signs in with OAuth (Claude, ChatGPT).",
+          "isRequired": false,
           "isSecret": true
         }
       ]
