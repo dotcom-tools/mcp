@@ -18,7 +18,8 @@ link to the full result page (waterfall, video, Lighthouse report, maps).
 
 | Tool | What it does |
 |---|---|
-| `run_test` | Runs a test from one or more locations (by name, such as "London", or picked automatically across regions). Waits up to 60 s and returns a summary per location. |
+| `check_website`, `check_page_speed`, `check_ping`, `check_traceroute`, `check_dns`, `check_mail_server`, `check_email_blacklist`, `check_ftp_server`, `check_stream` | One tool per test, with its own settings and `locations` or `regions` (default 3 locations; DNS 1). Each says what it can't tell and what it costs; results add a `verdict`. No logins or headers. |
+| `run_test` | Low-level: any test with any settings (logins, headers, cookies), from chosen locations. Waits up to 60 s and returns a summary per location. |
 | `get_test_result` | A test's summary, or every field for one location (`detail: "full"`). |
 | `list_tests` | Your recent tests. |
 | `list_test_types` | Every test type with its settings, cost and time limit. |

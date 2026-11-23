@@ -12,8 +12,8 @@ something looks **from the internet**, not from the user's own machine.
 
 ## Connect
 
-- **MCP (preferred):** use the Dotcom-Tools tools you have, such as `run_test` and `get_test_result` (your client may
-  prefix their names). Server: `https://www.dotcom-tools.com/mcp`; local clients can use the npm package
+- **MCP (preferred):** use the Dotcom-Tools tools you have: one `check_*` tool per test, plus `run_test` and
+  `get_test_result` (your client may prefix their names). Server: `https://www.dotcom-tools.com/mcp`; local clients can use the npm package
   `@dotcom-tools/mcp`.
 - **REST:** if there are no MCP tools, use the API with the key from the `DOTCOM_TOOLS_API_KEY` environment variable:
   `GET /api/v1/locations?testType={type}` for location ids, `POST /api/v1/tests/{type}` with `locationIds` and
@@ -28,38 +28,41 @@ something looks **from the internet**, not from the user's own machine.
 
 ## Run a check
 
-MCP arguments: `run_test` takes `testType`, `target` (URL, host, domain or IP), `locations` (names such as
-"London" or ids; optional), `locationCount` (when `locations` is empty; default 3), `options` (the test's settings as
-an object, such as `{"device":"mobile"}`) and `waitSeconds` (0-60, default 60). `get_test_result` takes `testId`,
-`detail` (`summary` or `full`) and `location` (one name or id, with `full`).
+MCP arguments: each `check_*` tool takes its target (`url`, `target`, `host` or `domain`), its own typed settings
+(such as `device` for `check_page_speed` or `recordType` for `check_dns`), `locations` (names such as "London" or
+ids) or `regions` (such as "Europe", "Asia" or "China"), `locationCount` (default 3, `check_dns` 1) and `waitSeconds`
+(0-60, default 60). The same call within 5 minutes returns the earlier test without a new charge. `run_test` takes
+`testType`, `target`, `locations`, `locationCount`, `options` (any settings, including logins and headers, which the
+check tools don't take) and `waitSeconds`. `get_test_result` takes `testId`, `detail` (`summary` or `full`) and
+`location` (one name or id, with `full`).
 
 1. Pick the cheapest test that answers the question (table below).
-2. Pick locations from the question. With no region in the question, leave `locations` empty: `run_test` picks 3 in
-   different regions. When a region matters, call `list_locations` and use the names it returns; if there is no
+2. Pick locations from the question. With no region in the question, leave `locations` and `regions` empty: the tool
+   picks 3 in different regions. When the user is in one area, pass `regions`. When a region matters, call `list_locations` and use the names it returns; if there is no
    location in that country, use the nearest one and say so. A free account can use up to 5 locations per test.
-3. Call `run_test` (`testType`, `target`, and `options` for settings; REST calls them `config`). It waits up to 60
+3. Call the `check_*` tool from the table (or `run_test` with `testType` and `options`; REST calls them `config`). It waits up to 60
    seconds. If the test isn't finished, call `get_test_result` with the `testId` about every 10 seconds; never start
    the same test again. Stop waiting after the test type's time limit (`list_test_types`) plus a few minutes, and tell
    the user it is still queued.
-4. Read `meaning` and each location's status first, then the numbers. If the summary doesn't explain a failure, call
+4. Read `verdict`, `meaning` and `comparison` first, then each location's numbers. If the summary doesn't explain a failure, call
    `get_test_result` with `detail: "full"` and **one** location (waterfall, failed requests, console errors,
    certificate, file links).
 5. Answer with what was measured, where and when, and give the user the `resultUrl`.
 
 ## Pick the test
 
-| Question | `testType` | `target` |
-|---|---|---|
-| Is it up? Down for everyone or just me? | `webserver`, then `ping` / `traceroute` if it can't connect | URL; host for ping |
-| Why is it slow? | `webserver` (TTFB and phases), then `webspeed` | URL |
-| Core Web Vitals, Lighthouse, mobile speed | `webspeed` (desktop by default; `options` `{"device":"mobile"}`) | URL |
-| Is something broken on the page? | `webspeed` (failed requests, console errors, screenshot) | URL |
-| Reachable from mainland China? | `webspeed` from mainland-China locations and one in Asia outside mainland China | URL |
-| What does it resolve to? Has DNS propagated? | `dns` (`options` `{"recordType":"MX"}` etc.) | domain |
-| Does the mail server work? | `email` (`options` `{"protocol":"smtp","port":587,"security":"startTls"}`; `imap`, `pop3`) | mail host |
-| Is our sending IP blacklisted? | `dnsbl` | IPv4 address or host |
-| Does the FTP server work? | `ftp` | host |
-| Does the video stream play? | `streaming` | HLS/DASH manifest or media URL |
+| Question | MCP tool | `testType` (run_test, REST) | Target |
+|---|---|---|---|
+| Is it up? Down for everyone or just me? | `check_website`, then `check_ping` / `check_traceroute` if it can't connect | `webserver`, `ping`, `traceroute` | URL; host for ping |
+| Why is it slow? | `check_website` (TTFB and phases), then `check_page_speed` | `webserver`, then `webspeed` | URL |
+| Core Web Vitals, Lighthouse, mobile speed | `check_page_speed` (`device: "mobile"`) | `webspeed` (`{"device":"mobile"}`) | URL |
+| Is something broken on the page? | `check_page_speed` (failed requests, console errors) | `webspeed` | URL |
+| Reachable from mainland China? | `check_page_speed` with `regions: ["China"]`, and one Asian location outside it | `webspeed` from mainland-China locations | URL |
+| What does it resolve to? Has DNS propagated? | `check_dns` (`recordType: "MX"` etc.) | `dns` | domain |
+| Does the mail server work? | `check_mail_server` (`protocol`, `security`, `port`) | `email` | mail host |
+| Is our sending IP blacklisted? | `check_email_blacklist` | `dnsbl` | IPv4 address or host |
+| Does the FTP server work? | `check_ftp_server` | `ftp` | host |
+| Does the video stream play? | `check_stream` | `streaming` | HLS/DASH manifest or media URL |
 
 `list_test_types` gives every type's settings, credit cost and time limit; call it when you need a setting not shown
 here.
